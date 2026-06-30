@@ -8,8 +8,12 @@
     <color name="black">#FF000000</color>
 
     <!-- Custom Colors -->
-    <color name="blue_light">#26aae1</color>
-    <color name="white">#ffffff</color>
-    <color name="blue_strong">#034d84</color>
-    <color name="base_color">#ffb98a</color>
+    <color name="surface">#ffffff</color>
+    <color name="surface_low">#f5f7f7</color>
+    <color name="on_surface">#18211c</color>
+    <color name="primary">#116b5b</color>
+    <color name="on_primary">#ffffff</color>
+    <color name="primary_container">#dcf2eb</color>
+    <color name="text_secondary">#66736d</color>
+    <color name="border">#dfe6e2</color>
 </resources>
