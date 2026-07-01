@@ -62,8 +62,8 @@ fun CustomTextField(
             )
         }
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = value,
+            onValueChange = onValueChange,
             maxLines = 1,
             modifier = modifier.fillMaxWidth(),
             colors = OutlinedTextFieldDefaults.colors(

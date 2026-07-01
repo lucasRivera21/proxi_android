@@ -1,9 +1,12 @@
 package com.lucasdev.proxi.auth.presentation.login
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -24,11 +27,13 @@ import com.lucasdev.proxi.core.presentation.components.CustomButton
 import com.lucasdev.proxi.core.presentation.components.CustomTextField
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(paddingValues: PaddingValues) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .background(colorResource(R.color.surface))
+            .padding(paddingValues)
+            .padding(horizontal = 16.dp, vertical = 24.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
@@ -51,6 +56,8 @@ fun LoginScreen() {
         Header()
 
         Form()
+
+        Footer()
     }
 }
 
@@ -83,8 +90,26 @@ fun Form() {
     }
 }
 
+@Composable
+fun Footer() {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text("¿No tienes cuenta?", color = colorResource(R.color.text_secondary))
+        Text(
+            "Crear cuenta",
+            color = colorResource(R.color.primary),
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.clickable {
+
+            }
+        )
+    }
+}
+
 @Preview(showSystemUi = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(PaddingValues())
 }
