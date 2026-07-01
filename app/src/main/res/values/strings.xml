@@ -5,10 +5,17 @@
     <string name="email">Correo</string>
     <string name="email_placeholder">tu@correo.com</string>
     <string name="password">Contraseña</string>
+    <string name="name">Nombre</string>
 
     <!-- Login Screen -->
     <string name="title_login">Recordatorios cuando llegues al lugar correcto</string>
     <string name="login_button">Iniciar Sesión</string>
     <string name="login_footer">¿No tienes cuenta?</string>
     <string name="login_footer_link">Crear cuenta</string>
+
+    <!-- Register Screen -->
+    <string name="register_button">Crear cuenta</string>
+    <string name="register_title">Guarda avisos por ubicación en segundos</string>
+    <string name="register_footer">¿Ya tienes cuenta?</string>
+    <string name="register_footer_link">Entrar</string>
 </resources>

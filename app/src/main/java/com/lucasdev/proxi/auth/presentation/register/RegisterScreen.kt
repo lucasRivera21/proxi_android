@@ -1,4 +1,4 @@
-package com.lucasdev.proxi.auth.presentation.login
+package com.lucasdev.proxi.auth.presentation.register
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,17 +26,16 @@ import androidx.navigation.NavHostController
 import com.lucasdev.proxi.R
 import com.lucasdev.proxi.core.presentation.components.CustomButton
 import com.lucasdev.proxi.core.presentation.components.CustomTextField
-import com.lucasdev.proxi.navigation.RegisterRoute
 
 @Composable
-fun LoginScreen(paddingValues: PaddingValues, navController: NavHostController) {
+fun RegisterScreen(paddingValues: PaddingValues, navController: NavHostController) {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
+            .fillMaxSize()
             .background(colorResource(R.color.surface))
             .padding(paddingValues)
-            .padding(horizontal = 16.dp, vertical = 24.dp)
-            .fillMaxSize(),
+            .padding(horizontal = 16.dp, vertical = 24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         Box(
@@ -48,7 +47,7 @@ fun LoginScreen(paddingValues: PaddingValues, navController: NavHostController) 
                 .padding(20.dp)
         ) {
             Icon(
-                painter = painterResource(R.drawable.ic_map_pin),
+                painter = painterResource(R.drawable.ic_user_plus),
                 contentDescription = null,
                 modifier = Modifier.size(34.dp),
                 tint = colorResource(R.color.primary)
@@ -66,18 +65,17 @@ fun LoginScreen(paddingValues: PaddingValues, navController: NavHostController) 
 @Composable
 fun Header() {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            stringResource(R.string.app_name),
+            stringResource(R.string.register_button),
             color = colorResource(R.color.on_surface),
             fontSize = 28.sp,
             fontWeight = FontWeight.ExtraBold
         )
-
         Text(
-            stringResource(R.string.title_login),
+            stringResource(R.string.register_title),
             color = colorResource(R.color.text_secondary)
         )
     }
@@ -87,15 +85,20 @@ fun Header() {
 fun Form() {
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         CustomTextField(
+            label = stringResource(R.string.name),
+            placeholder = stringResource(R.string.name)
+        ) { }
+        CustomTextField(
             label = stringResource(R.string.email),
             placeholder = stringResource(R.string.email_placeholder)
-        ) {}
+        ) { }
         CustomTextField(
             label = stringResource(R.string.password),
             placeholder = "••••••••",
             isPassword = true
-        ) {}
-        CustomButton(text = stringResource(R.string.login_button)) {}
+        ) { }
+
+        CustomButton(text = stringResource(R.string.register_button)) { }
     }
 }
 
@@ -105,13 +108,16 @@ fun Footer(navController: NavHostController) {
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(stringResource(R.string.login_footer), color = colorResource(R.color.text_secondary))
         Text(
-            stringResource(R.string.login_footer_link),
+            stringResource(R.string.register_footer),
+            color = colorResource(R.color.text_secondary)
+        )
+        Text(
+            stringResource(R.string.register_footer_link),
             color = colorResource(R.color.primary),
             fontWeight = FontWeight.Bold,
             modifier = Modifier.clickable {
-                navController.navigate(RegisterRoute)
+                navController.popBackStack()
             }
         )
     }

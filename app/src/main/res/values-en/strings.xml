@@ -5,10 +5,17 @@
     <string name="email">Mail</string>
     <string name="email_placeholder">your@email.com</string>
     <string name="password">Password</string>
+    <string name="name">Name</string>
 
     <!-- Login Screen -->
     <string name="title_login">Reminders when you arrive at the right place</string>
     <string name="login_button">Login</string>
     <string name="login_footer">Don\'t have an account\?</string>
     <string name="login_footer_link">Create Account</string>
+
+    <!-- Register Screen -->
+    <string name="register_button">Create Account</string>
+    <string name="register_title">Save alerts by location in seconds</string>
+    <string name="register_footer">Already have an account\?</string>
+    <string name="register_footer_link">Log in</string>
 </resources>

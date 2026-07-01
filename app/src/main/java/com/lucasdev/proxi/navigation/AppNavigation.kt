@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.lucasdev.proxi.auth.presentation.login.LoginScreen
+import com.lucasdev.proxi.auth.presentation.register.RegisterScreen
 import com.lucasdev.proxi.splash.presentation.SplashScreen
 
 @Composable
@@ -14,6 +15,7 @@ fun AppNavigation(paddingValues: PaddingValues) {
 
     NavHost(navController, startDestination = SplashRoute) {
         composable<SplashRoute> { SplashScreen() }
-        composable<LoginRoute> { LoginScreen(paddingValues) }
+        composable<LoginRoute> { LoginScreen(paddingValues, navController) }
+        composable<RegisterRoute> { RegisterScreen(paddingValues, navController) }
     }
 }
