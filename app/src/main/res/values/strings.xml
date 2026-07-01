@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">proxi</string>
+    <string name="app_name">Proxi</string>
+
+    <!-- Terms -->
+    <string name="email">Correo</string>
+    <string name="email_placeholder">tu@correo.com</string>
+    <string name="password">Contraseña</string>
+
+    <!-- Login Screen -->
+    <string name="title_login">Recordatorios cuando llegues al lugar correcto</string>
+    <string name="login_button">Iniciar Sesión</string>
+    <string name="login_footer">¿No tienes cuenta?</string>
+    <string name="login_footer_link">Crear cuenta</string>
 </resources>

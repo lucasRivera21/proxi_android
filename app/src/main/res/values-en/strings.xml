@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Proxi</string>
+
+    <!-- Terms -->
+    <string name="email">Mail</string>
+    <string name="email_placeholder">your@email.com</string>
+    <string name="password">Password</string>
+
+    <!-- Login Screen -->
+    <string name="title_login">Reminders when you arrive at the right place</string>
+    <string name="login_button">Login</string>
+    <string name="login_footer">Don\'t have an account\?</string>
+    <string name="login_footer_link">Create Account</string>
+</resources>

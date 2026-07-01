@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -68,14 +69,14 @@ fun Header() {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
-            "Proxi",
+            stringResource(R.string.app_name),
             color = colorResource(R.color.on_surface),
             fontSize = 28.sp,
             fontWeight = FontWeight.ExtraBold
         )
 
         Text(
-            "Recordatorios cuando llegues al lugar correcto",
+            stringResource(R.string.title_login),
             color = colorResource(R.color.text_secondary)
         )
     }
@@ -84,9 +85,16 @@ fun Header() {
 @Composable
 fun Form() {
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
-        CustomTextField(label = "Correo", placeholder = "tu@correo.com") {}
-        CustomTextField(label = "Contraseña", placeholder = "••••••••", isPassword = true) {}
-        CustomButton(text = "Iniciar sesión") {}
+        CustomTextField(
+            label = stringResource(R.string.email),
+            placeholder = stringResource(R.string.email_placeholder)
+        ) {}
+        CustomTextField(
+            label = stringResource(R.string.password),
+            placeholder = "••••••••",
+            isPassword = true
+        ) {}
+        CustomButton(text = stringResource(R.string.login_button)) {}
     }
 }
 
@@ -96,9 +104,9 @@ fun Footer() {
         horizontalArrangement = Arrangement.spacedBy(4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text("¿No tienes cuenta?", color = colorResource(R.color.text_secondary))
+        Text(stringResource(R.string.login_footer), color = colorResource(R.color.text_secondary))
         Text(
-            "Crear cuenta",
+            stringResource(R.string.login_footer_link),
             color = colorResource(R.color.primary),
             fontWeight = FontWeight.Bold,
             modifier = Modifier.clickable {
