@@ -1,0 +1,90 @@
+package com.lucasdev.proxi.auth.presentation.login
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.lucasdev.proxi.R
+import com.lucasdev.proxi.core.presentation.components.CustomButton
+import com.lucasdev.proxi.core.presentation.components.CustomTextField
+
+@Composable
+fun LoginScreen() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .background(colorResource(R.color.surface))
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .background(
+                    colorResource(R.color.primary_container),
+                    shape = RoundedCornerShape(20.dp)
+                )
+                .padding(20.dp)
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.ic_map_pin),
+                contentDescription = null,
+                modifier = Modifier.size(34.dp),
+                tint = colorResource(R.color.primary)
+            )
+        }
+
+        Header()
+
+        Form()
+    }
+}
+
+@Composable
+fun Header() {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            "Proxi",
+            color = colorResource(R.color.on_surface),
+            fontSize = 28.sp,
+            fontWeight = FontWeight.ExtraBold
+        )
+
+        Text(
+            "Recordatorios cuando llegues al lugar correcto",
+            color = colorResource(R.color.text_secondary)
+        )
+    }
+}
+
+@Composable
+fun Form() {
+    Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        CustomTextField(label = "Correo", placeholder = "tu@correo.com") {}
+        CustomTextField(label = "Contraseña", placeholder = "••••••••", isPassword = true) {}
+        CustomButton(text = "Iniciar sesión") {}
+    }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun LoginScreenPreview() {
+    LoginScreen()
+}
