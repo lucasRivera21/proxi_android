@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -29,7 +30,7 @@ import com.lucasdev.proxi.core.presentation.components.CustomTextField
 
 @Composable
 fun RegisterScreen(paddingValues: PaddingValues, navController: NavHostController) {
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(R.color.surface))
@@ -38,27 +39,31 @@ fun RegisterScreen(paddingValues: PaddingValues, navController: NavHostControlle
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .background(
-                    colorResource(R.color.primary_container),
-                    shape = RoundedCornerShape(20.dp)
+        item {
+            Box(
+                modifier = Modifier
+                    .background(
+                        colorResource(R.color.primary_container),
+                        shape = RoundedCornerShape(20.dp)
+                    )
+                    .padding(20.dp)
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_user_plus),
+                    contentDescription = null,
+                    modifier = Modifier.size(34.dp),
+                    tint = colorResource(R.color.primary)
                 )
-                .padding(20.dp)
-        ) {
-            Icon(
-                painter = painterResource(R.drawable.ic_user_plus),
-                contentDescription = null,
-                modifier = Modifier.size(34.dp),
-                tint = colorResource(R.color.primary)
-            )
+            }
         }
 
-        Header()
+        item {
+            Header()
+        }
 
-        Form()
+        item { Form() }
 
-        Footer(navController)
+        item { Footer(navController) }
     }
 }
 
