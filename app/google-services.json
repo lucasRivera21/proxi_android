@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "974001435490",
+    "project_id": "proxi-104f2",
+    "storage_bucket": "proxi-104f2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974001435490:android:8675d3b6f25259b962723b",
+        "android_client_info": {
+          "package_name": "com.lucasdev.proxi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANWEC93DtU7Czm0JRneCdd_I5DHvFIg4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
