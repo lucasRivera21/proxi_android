@@ -15,12 +15,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -29,7 +32,15 @@ import com.lucasdev.proxi.core.presentation.components.CustomButton
 import com.lucasdev.proxi.core.presentation.components.CustomTextField
 
 @Composable
-fun RegisterScreen(paddingValues: PaddingValues, navController: NavHostController) {
+fun RegisterScreen(
+    paddingValues: PaddingValues,
+    navController: NavHostController,
+    vm: RegisterViewModel
+) {
+    val name by vm.name.collectAsState()
+    val email by vm.email.collectAsState()
+    val password by vm.password.collectAsState()
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -61,7 +72,7 @@ fun RegisterScreen(paddingValues: PaddingValues, navController: NavHostControlle
             Header()
         }
 
-        item { Form() }
+        item { Form(name, email, password, vm) }
 
         item { Footer(navController) }
     }
@@ -87,21 +98,32 @@ fun Header() {
 }
 
 @Composable
-fun Form() {
+fun Form(name: String, email: String, password: String, vm: RegisterViewModel) {
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         CustomTextField(
+            value = name,
             label = stringResource(R.string.name),
             placeholder = stringResource(R.string.name)
-        ) { }
+        ) {
+            vm.onNameChange(it)
+        }
         CustomTextField(
+            value = email,
+            keyboardType = KeyboardType.Email,
             label = stringResource(R.string.email),
             placeholder = stringResource(R.string.email_placeholder)
-        ) { }
+        ) {
+            vm.onEmailChange(it)
+        }
         CustomTextField(
+            value = password,
+            keyboardType = KeyboardType.Password,
             label = stringResource(R.string.password),
             placeholder = "••••••••",
             isPassword = true
-        ) { }
+        ) {
+            vm.onPasswordChange(it)
+        }
 
         CustomButton(text = stringResource(R.string.register_button)) { }
     }

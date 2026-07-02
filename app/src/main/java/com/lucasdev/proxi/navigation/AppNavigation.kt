@@ -7,7 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.lucasdev.proxi.auth.presentation.login.LoginScreen
+import com.lucasdev.proxi.auth.presentation.login.LoginViewModel
 import com.lucasdev.proxi.auth.presentation.register.RegisterScreen
+import com.lucasdev.proxi.auth.presentation.register.RegisterViewModel
 import com.lucasdev.proxi.splash.presentation.SplashScreen
 import com.lucasdev.proxi.splash.presentation.SplashViewModel
 
@@ -20,7 +22,13 @@ fun AppNavigation(paddingValues: PaddingValues) {
             val vm = hiltViewModel<SplashViewModel>()
             SplashScreen(navController, vm)
         }
-        composable<LoginRoute> { LoginScreen(paddingValues, navController) }
-        composable<RegisterRoute> { RegisterScreen(paddingValues, navController) }
+        composable<LoginRoute> {
+            val vm = hiltViewModel<LoginViewModel>()
+            LoginScreen(paddingValues, navController, vm)
+        }
+        composable<RegisterRoute> {
+            val vm = hiltViewModel<RegisterViewModel>()
+            RegisterScreen(paddingValues, navController, vm)
+        }
     }
 }

@@ -44,7 +44,7 @@ fun CustomTextField(
         painterResource(R.drawable.ic_eye_closed)
     }
 
-    val visualTransformation = if (!showPassword) {
+    val visualTransformation = if (!showPassword && isPassword) {
         PasswordVisualTransformation()
     } else {
         VisualTransformation.None

@@ -15,12 +15,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -30,7 +33,14 @@ import com.lucasdev.proxi.core.presentation.components.CustomTextField
 import com.lucasdev.proxi.navigation.RegisterRoute
 
 @Composable
-fun LoginScreen(paddingValues: PaddingValues, navController: NavHostController) {
+fun LoginScreen(
+    paddingValues: PaddingValues,
+    navController: NavHostController,
+    vm: LoginViewModel
+) {
+    val email by vm.email.collectAsState()
+    val password by vm.password.collectAsState()
+
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -62,7 +72,7 @@ fun LoginScreen(paddingValues: PaddingValues, navController: NavHostController) 
             Header()
         }
 
-        item { Form() }
+        item { Form(email, password, vm) }
 
         item {
             Footer(navController)
@@ -91,17 +101,25 @@ fun Header() {
 }
 
 @Composable
-fun Form() {
+fun Form(email: String, password: String, vm: LoginViewModel) {
     Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
         CustomTextField(
+            value = email,
             label = stringResource(R.string.email),
-            placeholder = stringResource(R.string.email_placeholder)
-        ) {}
+            placeholder = stringResource(R.string.email_placeholder),
+            keyboardType = KeyboardType.Email
+        ) {
+            vm.onEmailChange(it)
+        }
         CustomTextField(
+            value = password,
             label = stringResource(R.string.password),
+            keyboardType = KeyboardType.Password,
             placeholder = "••••••••",
             isPassword = true
-        ) {}
+        ) {
+            vm.onPasswordChange(it)
+        }
         CustomButton(text = stringResource(R.string.login_button)) {}
     }
 }
