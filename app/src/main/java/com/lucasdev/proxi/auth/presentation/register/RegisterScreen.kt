@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.lucasdev.proxi.R
+import com.lucasdev.proxi.auth.domain.model.RegisterModel
 import com.lucasdev.proxi.core.presentation.components.CustomButton
 import com.lucasdev.proxi.core.presentation.components.CustomTextField
 
@@ -37,9 +38,7 @@ fun RegisterScreen(
     navController: NavHostController,
     vm: RegisterViewModel
 ) {
-    val name by vm.name.collectAsState()
-    val email by vm.email.collectAsState()
-    val password by vm.password.collectAsState()
+    val registerModel by vm.registerModel.collectAsState()
 
     LazyColumn(
         modifier = Modifier
@@ -72,7 +71,7 @@ fun RegisterScreen(
             Header()
         }
 
-        item { Form(name, email, password, vm) }
+        item { Form(registerModel, vm) }
 
         item { Footer(navController) }
     }
@@ -98,34 +97,42 @@ fun Header() {
 }
 
 @Composable
-fun Form(name: String, email: String, password: String, vm: RegisterViewModel) {
-    Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+fun Form(registerModel: RegisterModel, vm: RegisterViewModel) {
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         CustomTextField(
-            value = name,
+            value = registerModel.name,
             label = stringResource(R.string.name),
-            placeholder = stringResource(R.string.name)
+            placeholder = stringResource(R.string.name),
+            isError = !registerModel.isNameValid,
+            errorMessage = stringResource(R.string.name_error)
         ) {
             vm.onNameChange(it)
         }
         CustomTextField(
-            value = email,
+            value = registerModel.email,
             keyboardType = KeyboardType.Email,
             label = stringResource(R.string.email),
-            placeholder = stringResource(R.string.email_placeholder)
+            placeholder = stringResource(R.string.email_placeholder),
+            isError = !registerModel.isEmailValid,
+            errorMessage = stringResource(R.string.email_error)
         ) {
             vm.onEmailChange(it)
         }
         CustomTextField(
-            value = password,
+            value = registerModel.password,
             keyboardType = KeyboardType.Password,
             label = stringResource(R.string.password),
             placeholder = "••••••••",
-            isPassword = true
+            isPassword = true,
+            isError = !registerModel.isPasswordValid,
+            errorMessage = stringResource(R.string.password_error)
         ) {
             vm.onPasswordChange(it)
         }
 
-        CustomButton(text = stringResource(R.string.register_button)) { }
+        CustomButton(text = stringResource(R.string.register_button)) {
+            vm.onCreateAccount()
+        }
     }
 }
 

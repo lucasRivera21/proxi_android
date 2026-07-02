@@ -35,6 +35,8 @@ fun CustomTextField(
     placeholder: String = "",
     keyboardType: KeyboardType = KeyboardType.Text,
     isPassword: Boolean = false,
+    isError: Boolean = false,
+    errorMessage: String = "",
     onValueChange: (String) -> Unit = {}
 ) {
     var showPassword by remember { mutableStateOf(false) }
@@ -63,6 +65,12 @@ fun CustomTextField(
         }
         OutlinedTextField(
             value = value,
+            isError = isError,
+            supportingText = {
+                if (isError) {
+                    Text(errorMessage)
+                }
+            },
             onValueChange = onValueChange,
             maxLines = 1,
             modifier = modifier.fillMaxWidth(),

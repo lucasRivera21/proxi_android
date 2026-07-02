@@ -7,6 +7,11 @@
     <string name="password">Contraseña</string>
     <string name="name">Nombre</string>
 
+    <!-- Errors -->
+    <string name="name_error">El nombre debe tener al menos 4 caracteres</string>
+    <string name="email_error">El email no es válido</string>
+    <string name="password_error">La contraseña debe tener al menos 8 caracteres</string>
+
     <!-- Login Screen -->
     <string name="title_login">Recordatorios cuando llegues al lugar correcto</string>
     <string name="login_button">Iniciar Sesión</string>
