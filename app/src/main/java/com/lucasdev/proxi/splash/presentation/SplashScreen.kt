@@ -20,8 +20,8 @@ import com.lucasdev.proxi.navigation.SplashRoute
 fun SplashScreen(navController: NavHostController, vm: SplashViewModel) {
 
     LaunchedEffect(Unit) {
-        vm.init {
-            navController.navigate(LoginRoute) {
+        vm.init { route ->
+            navController.navigate(route) {
                 popUpTo(SplashRoute) {
                     inclusive = true
                 }
