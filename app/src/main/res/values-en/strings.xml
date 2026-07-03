@@ -19,6 +19,8 @@
     <string name="login_button">Login</string>
     <string name="login_footer">Don\'t have an account\?</string>
     <string name="login_footer_link">Create Account</string>
+    <string name="login_invalid_credentials">Invalid credentials</string>
+    <string name="login_verify_credentials">Verify your email and password</string>
 
     <!-- Register Screen -->
     <string name="register_button">Create Account</string>

@@ -19,6 +19,8 @@
     <string name="login_button">Iniciar Sesión</string>
     <string name="login_footer">¿No tienes cuenta?</string>
     <string name="login_footer_link">Crear cuenta</string>
+    <string name="login_invalid_credentials">Credenciales invalidas</string>
+    <string name="login_verify_credentials">Verifica el correo y la contraseña</string>
 
     <!-- Register Screen -->
     <string name="register_button">Crear cuenta</string>

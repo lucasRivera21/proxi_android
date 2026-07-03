@@ -29,8 +29,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.lucasdev.proxi.R
 import com.lucasdev.proxi.auth.domain.model.LoginModel
+import com.lucasdev.proxi.auth.domain.model.error.LoginCredentialsError
+import com.lucasdev.proxi.core.presentation.components.CustomBanner
 import com.lucasdev.proxi.core.presentation.components.CustomButton
 import com.lucasdev.proxi.core.presentation.components.CustomTextField
+import com.lucasdev.proxi.navigation.LoginRoute
+import com.lucasdev.proxi.navigation.MainRoute
 import com.lucasdev.proxi.navigation.RegisterRoute
 
 @Composable
@@ -72,7 +76,23 @@ fun LoginScreen(
             Header()
         }
 
-        item { Form(loginModel, vm) }
+        loginModel.error?.let { error ->
+            item {
+                CustomBanner(
+                    icon = painterResource(R.drawable.ic_triangle_alert),
+                    title = stringResource(
+                        if (error is LoginCredentialsError) R.string.login_invalid_credentials else
+                            R.string.unknown_error
+                    ),
+                    description = stringResource(
+                        if (error is LoginCredentialsError) R.string.login_verify_credentials else
+                            R.string.try_again_later
+                    )
+                )
+            }
+        }
+
+        item { Form(loginModel, vm, navController) }
 
         item {
             Footer(navController)
@@ -101,7 +121,7 @@ fun Header() {
 }
 
 @Composable
-fun Form(loginModel: LoginModel, vm: LoginViewModel) {
+fun Form(loginModel: LoginModel, vm: LoginViewModel, navController: NavHostController) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         CustomTextField(
             value = loginModel.email,
@@ -128,7 +148,13 @@ fun Form(loginModel: LoginModel, vm: LoginViewModel) {
             text = stringResource(R.string.login_button),
             isLoading = loginModel.isLoading
         ) {
-            vm.onLoginClick()
+            vm.onLoginClick {
+                navController.navigate(MainRoute) {
+                    popUpTo(LoginRoute) {
+                        inclusive = true
+                    }
+                }
+            }
         }
     }
 }
