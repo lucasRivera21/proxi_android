@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.lucasdev.proxi.R
+import com.lucasdev.proxi.auth.domain.model.LoginModel
 import com.lucasdev.proxi.core.presentation.components.CustomButton
 import com.lucasdev.proxi.core.presentation.components.CustomTextField
 import com.lucasdev.proxi.navigation.RegisterRoute
@@ -38,8 +39,7 @@ fun LoginScreen(
     navController: NavHostController,
     vm: LoginViewModel
 ) {
-    val email by vm.email.collectAsState()
-    val password by vm.password.collectAsState()
+    val loginModel by vm.loginModel.collectAsState()
 
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -72,7 +72,7 @@ fun LoginScreen(
             Header()
         }
 
-        item { Form(email, password, vm) }
+        item { Form(loginModel, vm) }
 
         item {
             Footer(navController)
@@ -101,26 +101,35 @@ fun Header() {
 }
 
 @Composable
-fun Form(email: String, password: String, vm: LoginViewModel) {
-    Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+fun Form(loginModel: LoginModel, vm: LoginViewModel) {
+    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         CustomTextField(
-            value = email,
+            value = loginModel.email,
             label = stringResource(R.string.email),
             placeholder = stringResource(R.string.email_placeholder),
-            keyboardType = KeyboardType.Email
+            keyboardType = KeyboardType.Email,
+            isError = !loginModel.isEmailValid,
+            errorMessage = stringResource(R.string.email_error)
         ) {
             vm.onEmailChange(it)
         }
         CustomTextField(
-            value = password,
+            value = loginModel.password,
             label = stringResource(R.string.password),
             keyboardType = KeyboardType.Password,
+            isError = !loginModel.isPasswordValid,
+            errorMessage = stringResource(R.string.password_error),
             placeholder = "••••••••",
             isPassword = true
         ) {
             vm.onPasswordChange(it)
         }
-        CustomButton(text = stringResource(R.string.login_button)) {}
+        CustomButton(
+            text = stringResource(R.string.login_button),
+            isLoading = loginModel.isLoading
+        ) {
+            vm.onLoginClick()
+        }
     }
 }
 
