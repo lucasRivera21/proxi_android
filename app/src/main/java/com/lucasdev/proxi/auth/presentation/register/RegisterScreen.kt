@@ -29,8 +29,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.lucasdev.proxi.R
 import com.lucasdev.proxi.auth.domain.model.RegisterModel
+import com.lucasdev.proxi.auth.domain.model.error.RegisterEmailAlreadyExist
+import com.lucasdev.proxi.auth.domain.model.error.RegisterUnknownError
+import com.lucasdev.proxi.core.presentation.components.CustomBanner
 import com.lucasdev.proxi.core.presentation.components.CustomButton
 import com.lucasdev.proxi.core.presentation.components.CustomTextField
+import com.lucasdev.proxi.navigation.MainRoute
+import com.lucasdev.proxi.navigation.RegisterRoute
 
 @Composable
 fun RegisterScreen(
@@ -71,7 +76,17 @@ fun RegisterScreen(
             Header()
         }
 
-        item { Form(registerModel, vm) }
+        if (registerModel.error is RegisterUnknownError) {
+            item {
+                CustomBanner(
+                    icon = painterResource(R.drawable.ic_triangle_alert),
+                    title = stringResource(R.string.unknown_error),
+                    description = stringResource(R.string.try_again_later)
+                )
+            }
+        }
+
+        item { Form(registerModel, vm, navController) }
 
         item { Footer(navController) }
     }
@@ -97,7 +112,7 @@ fun Header() {
 }
 
 @Composable
-fun Form(registerModel: RegisterModel, vm: RegisterViewModel) {
+fun Form(registerModel: RegisterModel, vm: RegisterViewModel, navController: NavHostController) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         CustomTextField(
             value = registerModel.name,
@@ -113,8 +128,8 @@ fun Form(registerModel: RegisterModel, vm: RegisterViewModel) {
             keyboardType = KeyboardType.Email,
             label = stringResource(R.string.email),
             placeholder = stringResource(R.string.email_placeholder),
-            isError = !registerModel.isEmailValid,
-            errorMessage = stringResource(R.string.email_error)
+            isError = !registerModel.isEmailValid || registerModel.error is RegisterEmailAlreadyExist,
+            errorMessage = stringResource(if (registerModel.error is RegisterEmailAlreadyExist) R.string.email_already_exist else R.string.email_error)
         ) {
             vm.onEmailChange(it)
         }
@@ -130,8 +145,17 @@ fun Form(registerModel: RegisterModel, vm: RegisterViewModel) {
             vm.onPasswordChange(it)
         }
 
-        CustomButton(text = stringResource(R.string.register_button)) {
-            vm.onCreateAccount()
+        CustomButton(
+            text = stringResource(R.string.register_button),
+            isLoading = registerModel.isLoading
+        ) {
+            vm.onCreateAccount {
+                navController.navigate(MainRoute) {
+                    popUpTo(RegisterRoute) {
+                        inclusive = true
+                    }
+                }
+            }
         }
     }
 }

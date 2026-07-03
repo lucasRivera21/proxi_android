@@ -10,3 +10,6 @@ object LoginRoute
 
 @Serializable
 object RegisterRoute
+
+@Serializable
+object MainRoute

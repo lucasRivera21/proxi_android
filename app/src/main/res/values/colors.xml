@@ -16,4 +16,7 @@
     <color name="primary_container">#dcf2eb</color>
     <color name="text_secondary">#66736d</color>
     <color name="border">#dfe6e2</color>
+    <color name="error_container">#FEE2E2</color>
+    <color name="error">#f04343</color>
+    <color name="on_error">#ffffff</color>
 </resources>

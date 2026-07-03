@@ -10,6 +10,7 @@ import com.lucasdev.proxi.auth.presentation.login.LoginScreen
 import com.lucasdev.proxi.auth.presentation.login.LoginViewModel
 import com.lucasdev.proxi.auth.presentation.register.RegisterScreen
 import com.lucasdev.proxi.auth.presentation.register.RegisterViewModel
+import com.lucasdev.proxi.main.presentation.MainScreen
 import com.lucasdev.proxi.splash.presentation.SplashScreen
 import com.lucasdev.proxi.splash.presentation.SplashViewModel
 
@@ -29,6 +30,10 @@ fun AppNavigation(paddingValues: PaddingValues) {
         composable<RegisterRoute> {
             val vm = hiltViewModel<RegisterViewModel>()
             RegisterScreen(paddingValues, navController, vm)
+        }
+
+        composable<MainRoute> {
+            MainScreen()
         }
     }
 }

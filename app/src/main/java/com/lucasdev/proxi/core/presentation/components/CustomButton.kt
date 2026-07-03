@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -26,19 +28,28 @@ fun CustomButton(
     textColor: Color = colorResource(R.color.on_primary),
     text: String = "",
     icon: Painter? = null,
+    isLoading: Boolean = false,
     onClick: () -> Unit = {},
 ) {
     OutlinedButton(
-        onClick = onClick,
+        onClick = { if (!isLoading) onClick() },
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(14.dp),
         border = null,
         colors = ButtonDefaults.buttonColors(containerColor = bgColor)
     ) {
-        Row(modifier = Modifier.padding(8.dp), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-            icon?.let { Icon(icon, contentDescription = null) }
-            Text(text, fontWeight = FontWeight.Bold, color = textColor)
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.size(36.dp), color = textColor)
+        } else {
+            Row(
+                modifier = Modifier.padding(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                icon?.let { Icon(icon, contentDescription = null) }
+                Text(text, fontWeight = FontWeight.Bold, color = textColor)
+            }
         }
+
     }
 }
 
